@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Message For You 💌</title>
+    <style>
+        :root {
+            --bg-color: #f5e1e5;
+            --envelope-color: #f2a6bb;
+            --envelope-flap: #e88b9c;
+            --envelope-inner: #f9d5df;
+            --letter-bg: #ffffff;
+            --text-color: #444444;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: var(--bg-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            cursor: pointer;
+        }
+
+        /* Envelope Wrapper */
+        .envelope {
+            position: relative;
+            width: 320px;
+            height: 210px;
+            background-color: var(--envelope-color);
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s ease;
+        }
+
+        .envelope:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Front Pocket */
+        .envelope::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-bottom: 115px solid var(--envelope-inner);
+            border-radius: 0 0 10px 10px;
+            z-index: 3;
+        }
+
+        /* Bottom Flap Shadow/Overlay for Depth */
+        .envelope-bottom {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 105px;
+            background-color: var(--envelope-flap);
+            clip-path: polygon(0 100%, 100% 100%, 50% 0%);
+            border-radius: 0 0 10px 10px;
+            z-index: 3;
+            opacity: 0.15;
+        }
+
+        /* Top Flap */
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-top: 105px solid var(--envelope-flap);
+            transform-origin: top;
+            transition: transform 0.4s ease 0.4s, z-index 0.2s ease;
+            z-index: 4;
+        }
+
+        /* The Letter inside */
+        .letter {
+            position: absolute;
+            bottom: 10px;
+            left: 15px;
+            width: 290px;
+            height: 180px;
+            background-color: var(--letter-bg);
+            border-radius: 6px;
+            padding: 15px;
+            box-sizing: border-box;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.4s ease, z-index 0.2s ease;
+            z-index: 2;
+            overflow-y: auto;
+            text-align: left;
+        }
+
+        /* Custom scrollbar for the letter */
+        .letter::-webkit-scrollbar {
+            width: 4px;
+        }
+        .letter::-webkit-scrollbar-thumb {
+            background-color: #f2a6bb;
+            border-radius: 4px;
+        }
+
+        .letter p {
+            margin: 0 0 10px 0;
+            color: var(--text-color);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* Heart Seal */
+        .heart-seal {
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background-color: #d85774;
+            clip-path: polygon(50% 15%, 100% 0%, 100% 50%, 50% 100%, 0% 50%, 0% 0%);
+            z-index: 5;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Open State Classes */
+        .container.open .flap {
+            transform: rotateX(180deg);
+            transition: transform 0.4s ease;
+            z-index: 1;
+        }
+
+        .container.open .heart-seal {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .container.open .letter {
+            transform: translateY(-135px);
+            height: 250px;
+            transition: transform 0.4s ease 0.4s, height 0.4s ease 0.4s;
+            z-index: 4;
+        }
+
+        /* Instruction text */
+        .instruction {
+            margin-top: 30px;
+            text-align: center;
+            color: #888888;
+            font-size: 14px;
+            letter-spacing: 1px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+    </style>
+</head>
+<body>
+
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <div class="container" id="envelopeContainer">
+            <div class="envelope">
+                <div class="flap"></div>
+                <div class="envelope-bottom"></div>
+                <div class="heart-seal"></div>
+                <div class="letter">
+                    <p>Please take the time to read this message. I just want to say that I like you (like, legit lang ba HAHAHAHAHAHAHAHAHA). Alam ko naman na I'm out of your league, pero I still took the risk na mag-confess—not because gusto ko maging sa akin ka or what, kundi para i-express lang talaga yung feelings ko towards you.</p>
+                    <p>I have my reasons naman kung bakit kita nagustuhan: matalino ka (like, legit lang ulit HAHAHAHAHAHAHAHAHA), you're cute pero mukha kang pakshet at the same time HAHAHAHHAAHHAHAHAHA, humorous ka at kaya mong makisabay sa mga katarantaduhan ba, and kahit tarantado ka madalas, na-feel ko pa rin yung pagiging caring mo—lalo na nung sinabi imong inalala mo ako nung nasa Germany ka tapos may binili kang pasalubong, kaya lang sa iyo na lang rin napunta kasi ang layo ko ba HAHAHAHAHAHA, na-touch ako doon! At syempre, yung pag-treat mo kay Mallows, like it really turned me on kasi I love animals and I have a big heart talaga towards them.</p>
+                    <p>Alam ko namang dating is not your priority pa or baka may like kang iba, pero gusto ko lang talaga i-express 'to, and I hope na after mo mabasa itong confession, hindi tayo maging awkward. Like, BFF pa rin tayo ba, we still do our routine, everyday chika, katarantaduhan, updates, or whatsoever!</p>
+                </div>
+            </div>
+        </div>
+        <div class="instruction" id="instructionText">Click to open</div>
+    </div>
+
+    <script>
+        const container = document.getElementById('envelopeContainer');
+        const instruction = document.getElementById('instructionText');
+        let isOpen = false;
+
+        container.addEventListener('click', () => {
+            isOpen = !isOpen;
+            if (isOpen) {
+                container.classList.add('open');
+                instruction.textContent = "Click to close";
+            } else {
+                container.classList.remove('open');
+                instruction.textContent = "Click to open";
+            }
+        });
+    </script>
+</body>
+</html>
